@@ -1,0 +1,138 @@
+- platform: unifigateway
+  host: <IP Unifi UDM>
+  username: <user admin unifi>
+  password: <password admin unifi>
+  version: UDMP-unifiOS
+  monitored_conditions:
+    - www
+    - wlan
+    - vpn
+    - lan
+    - wan
+    - firmware
+    
+
+- platform: template
+  sensors:
+    unifi_gateway_wan_cpu:
+      friendly_name: "CPU"
+      unit_of_measurement: "%"
+      value_template: "{{ states.sensor.unifi_gateway_wan.attributes['gw_system-stats']['cpu'] }}"
+    unifi_gateway_wan_mem:
+      friendly_name: "Memory"
+      unit_of_measurement: "%"
+      value_template: "{{ states.sensor.unifi_gateway_wan.attributes['gw_system-stats']['mem'] }}"
+    unifi_gateway_wan_ip:
+      friendly_name: "WAN IP"
+      value_template: "{{ states.sensor.unifi_gateway_wan.attributes.wan_ip }}"
+      entity_id: sensor.unifi_gateway_wan
+    unifi_gateway_wan_download:
+      friendly_name: "WAN Download"
+      unit_of_measurement: Kbps
+      icon_template: "mdi:progress-download"
+      value_template: "{{ (states.sensor.unifi_gateway_wan.attributes['rx_bytes-r'] / 1024) | int }}"
+    unifi_gateway_wan_uptime:
+      friendly_name: "UDM Uptime"
+      value_template: >
+        {%- set time = states.sensor.unifi_gateway_wan.attributes['gw_system-stats']['uptime'] | int %}
+        {%- set minutes = ((time % 3600) // 60) %}
+        {%- set minutes = '{}min'.format(minutes) if minutes > 0 else '' %}
+        {%- set hours = ((time % 86400) // 3600) %}
+        {%- set hours = '{}hr '.format(hours) if hours > 0 else '' %}
+        {%- set days = (time // 86400) %}
+        {%- set days = '{}d '.format(days) if days > 0 else '' %}
+        {{ 'Less than 1 min' if time < 60 else days + hours + minutes }}
+    unifi_gateway_firmware_version:
+      friendly_name: "UDM Firmware Version"
+      icon_template: "mdi:database-plus"
+      value_template: "{{ states.sensor.unifi_gateway_wan.attributes.gw_version }}"
+    unifi_gateway_www_xput_down:
+      friendly_name: "UDM Speedtest Download"
+      unit_of_measurement: Mbps
+      icon_template: "mdi:progress-download"
+      value_template: "{{ states.sensor.unifi_gateway_www.attributes.xput_down }}"
+    unifi_gateway_www_xput_up:
+      friendly_name: "UDM Speedtest Upload"
+      unit_of_measurement: Mbps
+      icon_template: "mdi:progress-upload"
+      value_template: "{{ states.sensor.unifi_gateway_www.attributes.xput_up }}"
+    unifi_gateway_www_speedtest_ping:
+      friendly_name: "UDM Speedtest Ping"
+      unit_of_measurement: ms
+      icon_template: "mdi:progress-clock"
+      value_template: "{{ states.sensor.unifi_gateway_www.attributes.speedtest_ping }}"
+    unifi_gateway_www_uptime:
+      friendly_name: "Internet Uptime"
+      value_template: >
+        {%- set time = states.sensor.unifi_gateway_www.attributes.uptime | int %}
+        {%- set minutes = ((time % 3600) // 60) %}
+        {%- set minutes = '{}min'.format(minutes) if minutes > 0 else '' %}
+        {%- set hours = ((time % 86400) // 3600) %}
+        {%- set hours = '{}hr '.format(hours) if hours > 0 else '' %}
+        {%- set days = (time // 86400) %}
+        {%- set days = '{}d '.format(days) if days > 0 else '' %}
+        {{ 'Less than 1 min' if time < 60 else days + hours + minutes }}
+    unifi_gateway_wlan_num_user:
+      friendly_name: "Users WLAN"
+      icon_template: "mdi:account-multiple"
+      value_template: "{{ states.sensor.unifi_gateway_wlan.attributes.num_user }}"
+    unifi_gateway_lan_num_user:
+      friendly_name: "Users LAN"
+      icon_template: "mdi:account-multiple"
+      value_template: "{{ states.sensor.unifi_gateway_lan.attributes.num_user }}"
+
+
+### Replace SSID0X by your SSID
+- platform: template
+  sensors:
+    unifi_ssid_SSID01_count_devices:
+      friendly_name: "Devices SSID SSID01"
+      unit_of_measurement: "devices"
+      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID01') | list | count }}"
+    unifi_ssid_SSID01_count_devices_2_4:
+      friendly_name: "Devices SSID SSID01 2.4Ghz"
+      unit_of_measurement: "devices"
+      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID01') | selectattr('attributes.radio_proto', 'in', ['g', 'ng']) | list | count }}"
+    unifi_ssid_SSID01_count_devices_5:
+      friendly_name: "Devices SSID SSID01 5Ghz"
+      unit_of_measurement: "devices"
+      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID01') | selectattr('attributes.radio_proto', 'in', ['ac', 'na']) | list | count }}"
+    unifi_ssid_SSID02_count_devices:
+      friendly_name: "Devices SSID SSID02"
+      unit_of_measurement: "devices"
+      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID02') | list | count }}"
+    unifi_ssid_SSID02_count_devices_2_4:
+      friendly_name: "Devices SSID SSID02 2.4Ghz"
+      unit_of_measurement: "devices"
+      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID02') | selectattr('attributes.radio_proto', 'in', ['g', 'ng']) | list | count }}"
+    unifi_ssid_SSID02_count_devices_5:
+      friendly_name: "Devices SSID SSID02 5Ghz"
+      unit_of_measurement: "devices"
+      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID02') | selectattr('attributes.radio_proto', 'in', ['ac', 'na']) | list | count }}"
+    unifi_ssid_SSID03_count_devices:
+      friendly_name: "Devices SSID SSID03"
+      unit_of_measurement: "devices"
+      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID03') | list | count }}"
+    unifi_ssid_SSID03_count_devices_2_4:
+      friendly_name: "Devices SSID SSID03 2.4Ghz"
+      unit_of_measurement: "devices"
+      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID03') | selectattr('attributes.radio_proto', 'in', ['g', 'ng']) | list | count }}"
+    unifi_ssid_SSID03_count_devices_5:
+      friendly_name: "Devices SSID SSID03 5Ghz"
+      unit_of_measurement: "devices"
+      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID03') | selectattr('attributes.radio_proto', 'in', ['ac', 'na']) | list | count }}"
+    unifi_ssid_SSID04_count_devices:
+      friendly_name: "Devices SSID SSID04"
+      unit_of_measurement: "devices"
+      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID04') | list | count }}"
+    unifi_ssid_SSID04_count_devices_2_4:
+      friendly_name: "Devices SSID SSID04 2.4Ghz"
+      unit_of_measurement: "devices"
+      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID04') | selectattr('attributes.radio_proto', 'in', ['g', 'ng']) | list | count }}"
+    unifi_ssid_SSID04_count_devices_5:
+      friendly_name: "Devices SSID SSID04 5Ghz"
+      unit_of_measurement: "devices"
+      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID04') | selectattr('attributes.radio_proto', 'in', ['ac', 'na']) | list | count }}"
+
+    
+    
