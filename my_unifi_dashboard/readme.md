@@ -10,7 +10,7 @@
 ## Mise en place des composants
 
 Installer et configurer l'intégration **UniFi Network** disponible de base sous HA.  
-Installer et configurer l'intégration **Sensor.Unifigateway** sous HACS.
+Installer et configurer l'intégration **Sensor.Unifigateway** et optionnellement **Custom brand icons** (pour des icones) sous HACS.
 
 
 ## Configuration
