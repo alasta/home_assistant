@@ -1,0 +1,761 @@
+title: Unifi
+views:
+  - theme: Backend-selected
+    title: unifi
+    path: unifi
+    icon: phu:ubiquiti
+    badges: []
+    cards:
+      - type: markdown
+        content: >-
+          ![Unifi Logo](/local/pics/ubiquiti-networks.png).
+
+
+
+          <font color="#03A9F4"> <ha-icon
+          icon="phu:ubiquiti-logo"></ha-icon></font> <a
+          href="https://<IP Unifi>" target="_blank">Unifi Controler</a> 
+      - type: vertical-stack
+        cards:
+          - card_mod:
+              style: |
+                ha-card {
+                  --paper-item-icon-color: #03A9F4;
+                }
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.unifi_gateway_wlan_num_user
+                color: '#03A9F4'
+                name: Clients WLAN
+              - entity: binary_sensor.night
+                color: '#6f7480'
+                y_axis: secondary
+                name: Nuit
+                aggregate_func: min
+                smoothing: false
+                show_state: true
+                show_line: false
+                show_points: false
+            state_map:
+              - value: 'off'
+                label: Day
+              - value: 'on'
+                label: Night
+            icon: mdi:account
+            hours_to_show: 72
+            line_width: 3
+          - card_mod:
+              style: |
+                ha-card {
+                  --paper-item-icon-color: #03A9F4;
+                }
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.unifi_gateway_lan_num_user
+                color: '#03A9F4'
+                name: Clients LAN
+              - entity: binary_sensor.night
+                color: '#6f7480'
+                y_axis: secondary
+                name: Nuit
+                aggregate_func: min
+                smoothing: false
+                show_state: true
+                show_line: false
+                show_points: false
+            state_map:
+              - value: 'off'
+                label: Day
+              - value: 'on'
+                label: Night
+            icon: mdi:account
+            hours_to_show: 72
+            line_width: 3
+      - type: vertical-stack
+        cards:
+          - card_mod:
+              style: |
+                ha-card {
+                  --paper-item-icon-color: #03A9F4;
+                }
+            type: custom:bar-card
+            title: UDM resources
+            entities:
+              - entity: sensor.unifi_gateway_wan_cpu
+                icon: mdi:cpu-64-bit
+              - entity: sensor.unifi_gateway_wan_mem
+                icon: mdi:memory
+          - type: entities
+            entities:
+              - entity: sensor.unifi_gateway_wan
+              - entity: sensor.unifi_gateway_lan
+              - entity: sensor.unifi_gateway_wlan
+              - entity: sensor.unifi_gateway_vpn
+              - entity: sensor.unifi_gateway_www
+            title: UDM State
+            card_mod:
+              style: |
+                ha-card {
+                  --paper-item-icon-color: #03A9F4;
+                }
+          - type: entities
+            entities:
+              - entity: sensor.unifi_gateway_firmware_version
+                name: Firmware Version
+                icon: ''
+              - entity: sensor.unifi_gateway_wan_ip
+                icon: mdi:ip-network
+              - entity: sensor.unifi_gateway_wan_uptime
+                name: Uptime
+            title: UDM Informations
+            card_mod:
+              style: |
+                ha-card {
+                  --paper-item-icon-color: #03A9F4;
+                }
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            card_mod:
+              style: |
+                ha-card {
+                  --paper-item-icon-color: #03A9F4;
+                }
+            style: |
+              ha-card {
+                font-family: var(--primary-font-family);
+              }
+              .graph {
+                padding-top: 0px;
+                padding-bottom: 0px;
+              }
+              .info {
+                padding-bottom: 0px;
+              }
+              .flex {
+                padding-bottom: 10px;
+              }
+            entities:
+              - sensor.unifi_gateway_www_xput_down
+            name: Download
+            align_state: center
+            align_icon: right
+            font_size: 100
+            font_size_header: 11
+            hours_to_show: 24
+            color_thresholds:
+              - color: '#03A9F4'
+                value: 100
+              - color: '#03A9F4'
+                value: 75
+              - color: '#03A9F4'
+                value: 50
+              - color: '#03A9F4'
+                value: 20
+              - color: '#03A9F4'
+                value: 0
+            line_color: var(--accent-color)
+            line_width: 4
+            animate: true
+            points_per_hour: 2
+            show:
+              fill: false
+              graph: line
+              extrema: true
+              icon: true
+              name: true
+          - type: custom:mini-graph-card
+            card_mod:
+              style: |
+                ha-card {
+                  --paper-item-icon-color: #03A9F4;
+                }
+            style: |
+              ha-card {
+                font-family: var(--primary-font-family);
+              }
+              .graph {
+                padding-top: 0px;
+                padding-bottom: 0px;
+              }
+              .info {
+                padding-bottom: 0px;
+              }
+              .flex {
+                padding-bottom: 10px;
+              }
+            entities:
+              - sensor.unifi_gateway_www_xput_up
+            name: Upload
+            align_state: center
+            align_icon: right
+            font_size: 100
+            font_size_header: 11
+            hours_to_show: 24
+            color_thresholds:
+              - color: '#03A9F4'
+                value: 100
+              - color: '#03A9F4'
+                value: 75
+              - color: '#03A9F4'
+                value: 50
+              - color: '#03A9F4'
+                value: 20
+              - color: '#03A9F4'
+                value: 0
+            line_color: var(--accent-color)
+            line_width: 4
+            animate: true
+            points_per_hour: 2
+            show:
+              fill: false
+              graph: line
+              extrema: true
+              icon: true
+              name: true
+          - type: custom:mini-graph-card
+            card_mod:
+              style: |
+                ha-card {
+                  --paper-item-icon-color: #03A9F4;
+                }
+            style: |
+              ha-card {
+                font-family: var(--primary-font-family);
+              }
+              .graph {
+                padding-top: 0px;
+                padding-bottom: 0px;
+              }
+              .info {
+                padding-bottom: 0px;
+              }
+              .flex {
+                padding-bottom: 10px;
+              }
+            entities:
+              - sensor.unifi_gateway_www_speedtest_ping
+            name: Ping
+            align_state: center
+            align_icon: right
+            font_size: 100
+            font_size_header: 11
+            hours_to_show: 24
+            color_thresholds:
+              - color: '#03A9F4'
+                value: 100
+              - color: '#03A9F4'
+                value: 75
+              - color: '#03A9F4'
+                value: 50
+              - color: '#03A9F4'
+                value: 20
+              - color: '#03A9F4'
+                value: 0
+            line_color: var(--accent-color)
+            line_width: 4
+            animate: true
+            points_per_hour: 2
+            show:
+              fill: false
+              graph: line
+              extrema: true
+              icon: true
+              name: true
+      - type: markdown
+        content: "<table>\n    <tbody>\n      <tr>\n        <td width=\"50\"><font color=\"#03A9F4\"><ha-icon icon=\"mdi:router-network\"></ha-icon></font></td>\n        <td width=\"300\">Switchs</td>\n        <td><center><font size=\"-2\">Devices</font><br> {{ states.sensor.unifi_gateway_lan.attributes['num_sw'] -}}</center></td>\n\t\t<td><center><font size=\"-2\">Adopted</font><br> {{ states.sensor.unifi_gateway_lan.attributes['num_adopted'] -}}</center></td>\n\t\t<td><center><font size=\"-2\">Disconnected</font><br> {{ states.sensor.unifi_gateway_lan.attributes['num_disconnected'] -}}</center></td>\n\t\t<td><center><font size=\"-2\">Pending</font><br> {{ states.sensor.unifi_gateway_lan.attributes['num_pending'] -}}</center></td>\n      </tr>\n\t  <tr>\n        <td width=\"50\"><font color=\"#03A9F4\"><ha-icon icon=\"mdi:wifi\"></ha-icon></font></td>\n        <td width=\"300\">AP</td>\n        <td><center><font size=\"-2\">Devices</font><br> {{ states.sensor.unifi_gateway_wlan.attributes['num_ap'] -}}</center></td>\n\t\t<td><center><font size=\"-2\">Adopted</font><br> {{ states.sensor.unifi_gateway_wlan.attributes['num_adopted'] -}}</center></td>\n\t\t<td><center><font size=\"-2\">Disconnected</font><br> {{ states.sensor.unifi_gateway_wlan.attributes['num_disconnected'] -}}</center></td>\n\t\t<td><center><font size=\"-2\">Pending</font><br> {{ states.sensor.unifi_gateway_wlan.attributes['num_pending'] -}}</center></td>\n      </tr>\n    </tbody>\n  </table> "
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                card_mod:
+                  style: |
+                    ha-card {
+                      --paper-item-icon-color: #03A9F4;
+                    }
+                style: |
+                  ha-card {
+                    font-family: var(--primary-font-family);
+                  }
+                  .graph {
+                    padding-top: 0px;
+                    padding-bottom: 0px;
+                  }
+                  .info {
+                    padding-bottom: 0px;
+                  }
+                  .flex {
+                    padding-bottom: 10px;
+                  }
+                entities:
+                  - sensor.unifi_ssid_SSID02_count_devices
+                name: WiFi SSID SSID02
+                align_state: center
+                align_icon: right
+                font_size: 100
+                font_size_header: 11
+                hours_to_show: 24
+                color_thresholds:
+                  - color: '#ef1d0f'
+                    value: 100
+                  - color: '#ef5a0f'
+                    value: 75
+                  - color: '#f0da11'
+                    value: 50
+                  - color: '#11f13a'
+                    value: 20
+                  - color: '#1da4f2'
+                    value: 0
+                line_color: var(--accent-color)
+                line_width: 4
+                animate: true
+                points_per_hour: 2
+                show:
+                  fill: false
+                  graph: line
+                  extrema: true
+                  icon: true
+                  name: true
+                icon: mdi:wifi
+              - type: markdown
+                content: "Wifi SSID02\n<table>\n    <tbody>\n      <tr>\n        <td width=\"50\"><font color=\"#03A9F4\"><ha-icon icon=\"mdi:devices\"></ha-icon></font></td>\n        <td width=\"300\">{{ states.sensor.unifi_ssid_SSID02_count_devices.state -}}  {% if \n             (states.sensor.unifi_ssid_SSID02_count_devices.state >= \"2\" ) %}\n            devices\n            {% else %}\n            device\n            {% endif %}</td>\n        <td><center><font size=\"-2\">2.4GHz</font><br>{{ states.sensor.unifi_ssid_SSID02_count_devices_2_4.state -}}</center></td>\n\t\t<td><center><font size=\"-2\">5GHz</font><br>{{ states.sensor.unifi_ssid_SSID02_count_devices_5.state -}}</center></td>\n      </tr>\n    </tbody>\n  </table> "
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                card_mod:
+                  style: |
+                    ha-card {
+                      --paper-item-icon-color: #03A9F4;
+                    }
+                style: |
+                  ha-card {
+                    font-family: var(--primary-font-family);
+                  }
+                  .graph {
+                    padding-top: 0px;
+                    padding-bottom: 0px;
+                  }
+                  .info {
+                    padding-bottom: 0px;
+                  }
+                  .flex {
+                    padding-bottom: 10px;
+                  }
+                entities:
+                  - sensor.unifi_ssid_SSID03_count_devices
+                name: WiFi SSID SSID03
+                align_state: center
+                align_icon: right
+                font_size: 100
+                font_size_header: 11
+                hours_to_show: 24
+                color_thresholds:
+                  - color: '#ef1d0f'
+                    value: 100
+                  - color: '#ef5a0f'
+                    value: 75
+                  - color: '#f0da11'
+                    value: 50
+                  - color: '#11f13a'
+                    value: 20
+                  - color: '#1da4f2'
+                    value: 0
+                line_color: var(--accent-color)
+                line_width: 4
+                animate: true
+                points_per_hour: 2
+                show:
+                  fill: false
+                  graph: line
+                  extrema: true
+                  icon: true
+                  name: true
+                icon: mdi:wifi
+              - type: markdown
+                content: "Wifi SSID03\n<table>\n    <tbody>\n      <tr>\n        <td width=\"50\"><font color=\"#03A9F4\"><ha-icon icon=\"mdi:devices\"></ha-icon></font></td>\n        <td width=\"300\">{{ states.sensor.unifi_ssid_SSID03_count_devices.state -}} {% if \n             (states.sensor.unifi_ssid_SSID03_count_devices.state >= \"2\" ) %}\n            devices\n            {% else %}\n            device\n            {% endif %}</td>\n        <td><center><font size=\"-2\">2.4GHz</font><br>{{ states.sensor.unifi_ssid_SSID03_count_devices_2_4.state -}}</center></td>\n\t\t<td><center><font size=\"-2\">5GHz</font><br>{{ states.sensor.unifi_ssid_SSID03_count_devices_5.state -}}</center></td>\n      </tr>\n    </tbody>\n  </table> "
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                card_mod:
+                  style: |
+                    ha-card {
+                      --paper-item-icon-color: #03A9F4;
+                    }
+                style: |
+                  ha-card {
+                    font-family: var(--primary-font-family);
+                  }
+                  .graph {
+                    padding-top: 0px;
+                    padding-bottom: 0px;
+                  }
+                  .info {
+                    padding-bottom: 0px;
+                  }
+                  .flex {
+                    padding-bottom: 10px;
+                  }
+                entities:
+                  - sensor.unifi_ssid_SSID04_count_devices
+                name: WiFi SSID SSID04
+                align_state: center
+                align_icon: right
+                font_size: 100
+                font_size_header: 11
+                hours_to_show: 24
+                color_thresholds:
+                  - color: '#ef1d0f'
+                    value: 100
+                  - color: '#ef5a0f'
+                    value: 75
+                  - color: '#f0da11'
+                    value: 50
+                  - color: '#11f13a'
+                    value: 20
+                  - color: '#1da4f2'
+                    value: 0
+                line_color: var(--accent-color)
+                line_width: 4
+                animate: true
+                points_per_hour: 2
+                show:
+                  fill: false
+                  graph: line
+                  extrema: true
+                  icon: true
+                  name: true
+                icon: mdi:wifi
+              - type: markdown
+                content: " Wifi SSID04\n<table>\n    <tbody>\n      <tr>\n        <td width=\"50\"><font color=\"#03A9F4\"><ha-icon icon=\"mdi:devices\"></ha-icon></font></td>\n        <td width=\"300\">{{ states.sensor.unifi_ssid_SSID04_count_devices.state -}} {% if \n             (states.sensor.unifi_ssid_SSID04_count_devices.state >= \"2\" ) %}\n            devices\n            {% else %}\n            device\n            {% endif %}</td>\n        <td><center><font size=\"-2\">2.4GHz</font><br>{{ states.sensor.unifi_ssid_SSID04_count_devices_2_4.state -}}</center></td>\n\t\t<td><center><font size=\"-2\">5GHz</font><br>{{ states.sensor.unifi_ssid_SSID04_count_devices_5.state -}}</center></td>\n      </tr>\n    </tbody>\n  </table> "
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                card_mod:
+                  style: |
+                    ha-card {
+                      --paper-item-icon-color: #03A9F4;
+                    }
+                style: |
+                  ha-card {
+                    font-family: var(--primary-font-family);
+                  }
+                  .graph {
+                    padding-top: 0px;
+                    padding-bottom: 0px;
+                  }
+                  .info {
+                    padding-bottom: 0px;
+                  }
+                  .flex {
+                    padding-bottom: 10px;
+                  }
+                entities:
+                  - sensor.unifi_ssid_SSID01_count_devices
+                name: WiFi SSID SSID01
+                align_state: center
+                align_icon: right
+                font_size: 100
+                font_size_header: 11
+                hours_to_show: 24
+                color_thresholds:
+                  - color: '#ef1d0f'
+                    value: 100
+                  - color: '#ef5a0f'
+                    value: 75
+                  - color: '#f0da11'
+                    value: 50
+                  - color: '#11f13a'
+                    value: 20
+                  - color: '#1da4f2'
+                    value: 0
+                line_color: var(--accent-color)
+                line_width: 4
+                animate: true
+                points_per_hour: 2
+                show:
+                  fill: false
+                  graph: line
+                  extrema: true
+                  icon: true
+                  name: true
+                icon: mdi:wifi
+              - type: markdown
+                content: "Wifi SSID01\n<table>\n    <tbody>\n      <tr>\n        <td width=\"50\"><font color=\"#03A9F4\"><ha-icon icon=\"mdi:devices\"></ha-icon></font></td>\n        <td width=\"300\">{{ states.sensor.unifi_ssid_SSID01_count_devices.state -}}  {% if \n             (states.sensor.unifi_ssid_SSID01_count_devices.state >= \"2\" ) %}\n            devices\n            {% else %}\n            device\n            {% endif %}</td>\n        <td><center><font size=\"-2\">2.4GHz</font><br>{{ states.sensor.unifi_ssid_SSID01_count_devices_2_4.state -}}</center></td>\n\t\t<td><center><font size=\"-2\">5GHz</font><br>{{ states.sensor.unifi_ssid_SSID01_count_devices_5.state -}}</center></td>\n      </tr>\n    </tbody>\n  </table> "
+      - type: vertical-stack
+        cards:
+          - type: custom:mini-graph-card
+            card_mod:
+              style: |
+                ha-card {
+                  --paper-item-icon-color: #03A9F4;
+                }
+            name: WWW trafic
+            entities:
+              - entity: sensor.unifi_gateway_www
+                attribute: tx_bytes-r
+                color: '#03A9F4'
+                name: Tx
+                unit: Bytes
+              - entity: sensor.unifi_gateway_www
+                attribute: rx_bytes-r
+                color: '#ABAFB4'
+                name: Rx
+                unit: Bytes
+              - entity: binary_sensor.night
+                color: '#6f7480'
+                y_axis: secondary
+                name: Night
+                aggregate_func: min
+                smoothing: false
+                show_state: true
+                show_line: false
+                show_points: false
+            state_map:
+              - value: 0
+                label: 0
+              - value: 'off'
+                label: Day
+              - value: 'on'
+                label: Night
+            icon: mdi:lan
+            hours_to_show: 72
+            line_width: 3
+          - type: custom:mini-graph-card
+            card_mod:
+              style: |
+                ha-card {
+                  --paper-item-icon-color: #03A9F4;
+                }
+            name: WAN trafic
+            entities:
+              - entity: sensor.unifi_gateway_wan
+                attribute: tx_bytes-r
+                color: '#03A9F4'
+                name: Tx
+                unit: Bytes
+              - entity: sensor.unifi_gateway_wan
+                attribute: rx_bytes-r
+                color: '#ABAFB4'
+                name: Rx
+                unit: Bytes
+              - entity: binary_sensor.night
+                color: '#6f7480'
+                y_axis: secondary
+                name: Night
+                aggregate_func: min
+                smoothing: false
+                show_state: true
+                show_line: false
+                show_points: false
+            state_map:
+              - value: 0
+                label: 0
+              - value: 'off'
+                label: Day
+              - value: 'on'
+                label: Night
+            icon: mdi:wan
+            hours_to_show: 72
+            line_width: 3
+          - type: custom:mini-graph-card
+            card_mod:
+              style: |
+                ha-card {
+                  --paper-item-icon-color: #03A9F4;
+                }
+            name: WLAN trafic
+            entities:
+              - entity: sensor.unifi_gateway_wlan
+                attribute: tx_bytes-r
+                color: '#03A9F4'
+                name: Tx
+                unit: Bytes
+              - entity: sensor.unifi_gateway_wlan
+                attribute: rx_bytes-r
+                color: '#ABAFB4'
+                name: Rx
+                unit: Bytes
+              - entity: binary_sensor.night
+                color: '#6f7480'
+                y_axis: secondary
+                name: Night
+                aggregate_func: min
+                smoothing: false
+                show_state: true
+                show_line: false
+                show_points: false
+            state_map:
+              - value: 0
+                label: 0
+              - value: 'off'
+                label: Day
+              - value: 'on'
+                label: Night
+            icon: mdi:wifi
+            hours_to_show: 72
+            line_width: 3
+          - type: custom:mini-graph-card
+            card_mod:
+              style: |
+                ha-card {
+                  --paper-item-icon-color: #03A9F4;
+                }
+            name: LAN trafic
+            entities:
+              - entity: sensor.unifi_gateway_lan
+                attribute: tx_bytes-r
+                color: '#03A9F4'
+                name: Tx
+                unit: Bytes
+              - entity: sensor.unifi_gateway_lan
+                attribute: rx_bytes-r
+                color: '#ABAFB4'
+                name: Rx
+                unit: Bytes
+              - entity: binary_sensor.night
+                color: '#6f7480'
+                y_axis: secondary
+                name: Night
+                aggregate_func: min
+                smoothing: false
+                show_state: true
+                show_line: false
+                show_points: false
+            state_map:
+              - value: 0
+                label: 0
+              - value: 'off'
+                label: Day
+              - value: 'on'
+                label: Night
+            icon: mdi:wifi
+            hours_to_show: 72
+            line_width: 3
+      - type: vertical-stack
+        cards:
+          - type: custom:mini-graph-card
+            card_mod:
+              style: |
+                ha-card {
+                  --paper-item-icon-color: #03A9F4;
+                }
+            name: VPN User trafic
+            entities:
+              - entity: sensor.unifi_gateway_vpn
+                attribute: remote_user_tx_packets
+                color: '#03A9F4'
+                name: Tx
+                unit: Packets
+              - entity: sensor.unifi_gateway_vpn
+                attribute: remote_user_rx_packets
+                color: '#ABAFB4'
+                name: Rx
+                unit: Packets
+              - entity: binary_sensor.night
+                color: '#6f7480'
+                y_axis: secondary
+                name: Night
+                aggregate_func: min
+                smoothing: false
+                show_state: true
+                show_line: false
+                show_points: false
+            state_map:
+              - value: 0
+                label: 0
+              - value: 'off'
+                label: Day
+              - value: 'on'
+                label: Night
+            icon: mdi:shield-home-outline
+            hours_to_show: 72
+            line_width: 3
+          - type: custom:mini-graph-card
+            card_mod:
+              style: |
+                ha-card {
+                  --paper-item-icon-color: #03A9F4;
+                }
+            entities:
+              - entity: sensor.unifi_gateway_vpn
+                attribute: remote_user_num_active
+                color: '#03A9F4'
+                name: VPN User
+                unit: user(s)
+              - entity: binary_sensor.night
+                color: '#6f7480'
+                y_axis: secondary
+                name: Night
+                aggregate_func: min
+                smoothing: false
+                show_state: true
+                show_line: false
+                show_points: false
+            state_map:
+              - value: 0
+                label: 0
+              - value: 'off'
+                label: Day
+              - value: 'on'
+                label: Night
+            icon: mdi:shield-home-outline
+            hours_to_show: 72
+            line_width: 3
+          - type: custom:mini-graph-card
+            card_mod:
+              style: |
+                ha-card {
+                  --paper-item-icon-color: #03A9F4;
+                }
+            name: VPN User trafic
+            entities:
+              - entity: sensor.unifi_gateway_vpn
+                attribute: remote_user_tx_bytes
+                color: '#03A9F4'
+                name: Tx
+                unit: Bytes
+              - entity: sensor.unifi_gateway_vpn
+                attribute: remote_user_rx_bytes
+                color: '#ABAFB4'
+                name: Rx
+                unit: Bytes
+              - entity: binary_sensor.night
+                color: '#6f7480'
+                y_axis: secondary
+                name: Night
+                aggregate_func: min
+                smoothing: false
+                show_state: true
+                show_line: false
+                show_points: false
+            state_map:
+              - value: 0
+                label: 0
+              - value: 'off'
+                label: Day
+              - value: 'on'
+                label: Night
+            icon: mdi:shield-home-outline
+            hours_to_show: 72
+            line_width: 3
+  - theme: Backend-selected
+    icon: mdi:devices
+    title: Devices
+    path: devices
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - entity: switch.machineaaa
+            name: Machine AAA
+            icon: mdi:desktop-tower-monitor
+          - entity: switch.machinebbb
+            name: Machine BBB
+            icon: mdi:desktop-tower-monitor
+        title: Accès au réseau
+        card_mod:
+          style: |
+            ha-card {
+              --paper-item-icon-color: #03A9F4;
+            }
