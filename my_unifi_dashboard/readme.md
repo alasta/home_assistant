@@ -13,6 +13,14 @@ Installer et configurer l'intégration **UniFi Network** disponible de base sous
 Installer et configurer l'intégration **Sensor.Unifigateway** et optionnellement **Custom brand icons** (pour des icones) sous HACS.
 
 
+mini-graph-card
+card_mod
+
+
+
+
+
+
 ## Configuration
 
 Le contenu du fichier **sensor.yaml** est à mettre dans votre **configuration.yaml** ou fichier YAML de configuration sensor.  
