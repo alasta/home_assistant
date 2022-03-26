@@ -13,9 +13,15 @@ Installer et configurer l'intégration **UniFi Network** disponible de base sous
 Installer et configurer l'intégration **Sensor.Unifigateway** sous HACS.
 
 
+## Configuration
+
+Le contenu du fichier **sensor.yaml** est à mettre dans votre **configuration.yaml** ou fichier YAML de configuration sensor.  
+Il y a SSID01 à SSID04, c'est à modifier par vos SSID, j'en ai 4 pour mes besoins.  
 
 
 
+
+## Résultat
 ![Image1](./screenshots/01.png)
 
 
