@@ -49,7 +49,7 @@ views:
             }
       - type: custom:bar-card
         entities:
-          - entity: sensor.disque_dur_free_space_2
+          - entity: sensor.disque_dur_free_space
             icon: mdi:harddisk
         color: red
         card_mod:
