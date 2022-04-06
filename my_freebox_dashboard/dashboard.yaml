@@ -1,0 +1,100 @@
+title: Freebox
+swipe_nav:
+  wrap: false
+  animate: swipe
+  prevent_default: true
+  swipe_amount: 30
+views:
+  - path: default_view
+    title: Freebox
+    icon: pha:freebox-server
+    badges: []
+    cards:
+      - type: markdown
+        content: "![Freebox Logo](/local/pics/freebox-logo.png)\n\n\n<table>\n    <tbody>\n      <tr>\n        <td><b>IPv4 :</b> </td>\n        <td>{{ states.device_tracker.freebox_server_r2.attributes['IPv4'] -}}</td>\n\t  <tr>\n       <td><b>IPv6 : </b></td>\n        <td>{{ states.device_tracker.freebox_server_r2.attributes['IPv6'] -}}</td>\n      </tr>\n\t  <tr>\n       <td><b>Connexion : </b></td>\n        <td>{{ states.device_tracker.freebox_server_r2.attributes['connection_type'] -}}</td>\n      </tr>\n\t  <tr>\n       <td><b>Uptime : </b></td>\n        <td>{{ states.device_tracker.freebox_server_r2.attributes['uptime'] -}}</td>\n      </tr>\n\t  <tr>\n       <td><b>Firmware : </b></td>\n        <td>{{ states.device_tracker.freebox_server_r2.attributes['firmware_version'] -}}</td>\n      </tr>\n\t  <tr>\n       <td><b>Serial : </b></td>\n        <td>{{ states.device_tracker.freebox_server_r2.attributes['serial'] -}}</td>\n      </tr>\n\t  <tr>\n       <td><b>Bandwidth DL : </b></td>\n        <td>{{ states.sensor.myfreebox.attributes['bandwidth_down'] }}  Mb/s</td>\n      </tr>\n\t  <tr>\n       <td><b>Bandwidth UP : </b></td>\n        <td>{{ states.sensor.myfreebox.attributes['bandwidth_up'] }}  Mb/s</td>\n      </tr>\n\t  <tr>\n       <td><b>Chaîne TV : </b></td>\n        <td>{{ states.sensor.myfreeboxplayer_1.attributes['channel'] -}}</td>\n      </tr>\n    </tbody>\n  </table>\n  "
+      - type: markdown
+        content: >-
+          ![Logo chaine](/local/pics/freeboxlogochaines/{{
+          states.sensor.myfreeboxplayer_1.attributes['channel'] -}}.png)
+        title: Chaîne en cours
+      - type: custom:mini-graph-card
+        name: Débit Freebox
+        entities:
+          - entity: sensor.freebox_download_speed
+            color: '#5282F7'
+            name: Download
+          - entity: sensor.freebox_upload_speed
+            color: red
+            name: Upload
+          - entity: binary_sensor.night
+            color: '#6f7480'
+            y_axis: secondary
+            name: Nuit
+            aggregate_func: min
+            smoothing: false
+            show_state: true
+            show_line: false
+            show_points: false
+        state_map:
+          - value: 'off'
+            label: Jour
+          - value: 'on'
+            label: Nuit
+        hours_to_show: 72
+        line_width: 3
+        card_mod:
+          style: |
+            ha-card {
+              --paper-item-icon-color: red;
+            }
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.disque_dur_free_space_2
+            icon: mdi:harddisk
+        color: red
+        card_mod:
+          style: |
+            bar-card-current, bar-card-backgroundbar {
+              border-radius: 8px;
+            }
+            ha-card {
+              --paper-item-icon-color: red;
+            }
+      - type: horizontal-stack
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: gauge
+                entity: sensor.freebox_temperature_switch
+                name: T°C Switch
+                needle: false
+                severity:
+                  green: 0
+                  yellow: 0
+                  red: 0
+              - type: gauge
+                entity: sensor.freebox_disque_dur
+                name: T°C Disque
+                needle: false
+                severity:
+                  green: 0
+                  yellow: 0
+                  red: 0
+          - type: vertical-stack
+            cards:
+              - type: gauge
+                entity: sensor.freebox_temperature_cpu_a
+                name: T°C CPU A
+                needle: false
+                severity:
+                  green: 0
+                  yellow: 0
+                  red: 0
+              - type: gauge
+                entity: sensor.freebox_temperature_cpu_b
+                name: T°C CPU B
+                needle: false
+                severity:
+                  green: 0
+                  yellow: 0
+                  red: 0
