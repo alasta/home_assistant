@@ -35,7 +35,3 @@ Modifier les entitées qui correspondent à vos machines, rechercher **switch.ma
 ![Image1](./screenshots/01.png)
 
 
-
-![Image2](./screenshots/02.png)
-
-![Image3](./screenshots/03.png)
