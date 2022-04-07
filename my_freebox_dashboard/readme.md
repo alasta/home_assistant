@@ -13,6 +13,7 @@ Installer et configurer l'intégration dans HACS :
 
   - **mini-graph-card**
   - **bar-card**
+  - **apiFreebox sensor**
 
 Il faut installer l'intégration **Freebox**.
 
