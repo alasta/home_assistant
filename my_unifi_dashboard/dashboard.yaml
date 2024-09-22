@@ -8,7 +8,7 @@ views:
     cards:
       - type: markdown
         content: >-
-          ![Unifi Logo](/local/pics/ubiquiti-networks.png).
+          ![Unifi Logo](/local/pics/ubiquitinetworks.png).
 
 
 
