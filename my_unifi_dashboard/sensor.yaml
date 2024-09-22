@@ -81,10 +81,7 @@
       icon_template: "mdi:account-multiple"
       value_template: "{{ states.sensor.unifi_gateway_lan.attributes.num_user }}"
 
-
-### Replace SSID0X by your SSID
-- platform: template
-  sensors:
+### Replace SSID0X by your SSID, !!! In the sensor name **unifi_ssid_XXX_count_devicesXXX**, set the SSID in lower case.
     unifi_ssid_SSID01_count_devices:
       friendly_name: "Devices SSID SSID01"
       unit_of_measurement: "devices"
