@@ -93,7 +93,7 @@
     unifi_ssid_SSID01_count_devices_5:
       friendly_name: "Devices SSID SSID01 5Ghz"
       unit_of_measurement: "devices"
-      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID01') | selectattr('attributes.radio_proto', 'in', ['ac', 'na']) | list | count }}"
+      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID01') | selectattr('attributes.radio_proto', 'in', ['ac', 'na', 'a']) | list | count }}"
     unifi_ssid_SSID02_count_devices:
       friendly_name: "Devices SSID SSID02"
       unit_of_measurement: "devices"
@@ -105,7 +105,7 @@
     unifi_ssid_SSID02_count_devices_5:
       friendly_name: "Devices SSID SSID02 5Ghz"
       unit_of_measurement: "devices"
-      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID02') | selectattr('attributes.radio_proto', 'in', ['ac', 'na']) | list | count }}"
+      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID02') | selectattr('attributes.radio_proto', 'in', ['ac', 'na', 'a']) | list | count }}"
     unifi_ssid_SSID03_count_devices:
       friendly_name: "Devices SSID SSID03"
       unit_of_measurement: "devices"
@@ -117,7 +117,7 @@
     unifi_ssid_SSID03_count_devices_5:
       friendly_name: "Devices SSID SSID03 5Ghz"
       unit_of_measurement: "devices"
-      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID03') | selectattr('attributes.radio_proto', 'in', ['ac', 'na']) | list | count }}"
+      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID03') | selectattr('attributes.radio_proto', 'in', ['ac', 'na', 'a']) | list | count }}"
     unifi_ssid_SSID04_count_devices:
       friendly_name: "Devices SSID SSID04"
       unit_of_measurement: "devices"
@@ -129,7 +129,7 @@
     unifi_ssid_SSID04_count_devices_5:
       friendly_name: "Devices SSID SSID04 5Ghz"
       unit_of_measurement: "devices"
-      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID04') | selectattr('attributes.radio_proto', 'in', ['ac', 'na']) | list | count }}"
+      value_template: "{{ states.device_tracker | selectattr('attributes.essid', 'eq', 'SSID04') | selectattr('attributes.radio_proto', 'in', ['ac', 'na', 'a']) | list | count }}"
 
     
     
