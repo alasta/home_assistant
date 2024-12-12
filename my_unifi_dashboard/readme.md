@@ -29,7 +29,8 @@ Dans le **dashboard.yaml** le contenu pour les dashboards (mettre l'image unifi 
 Il y en a un pour les infos Unifi et l'autre pour bloquer les accès réseaux.  
 
 Note : le logo unifi est dans le dossier **assets** et le mettre dans le dossier HA : **/config/www/pics** (peut être à créer).
-Modifier les entitées qui correspondent à vos machines, rechercher **switch.machineaaa**.
+Modifier les entitées qui correspondent à vos machines, rechercher **switch.machineaaa**.  
+S'assurrer que les entitées **device_tracker.XXXX** de l'intégration **UniFi Network** soient bien activées (pour le nombre d'entitée par SSID 5Ghz & 2.4 Ghz).
 
 ## Résultat
 ![Image1](./screenshots/01.png)
