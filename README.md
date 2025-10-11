@@ -4,4 +4,5 @@ Voici quelques une de mes configurations de dashboard.
 
 - Freebox
 - Unifi
+- Updates des composants
 
