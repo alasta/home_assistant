@@ -246,8 +246,6 @@ views:
               include:
                 - entity_id: update.*
                   state: 'on'
-                  attributes:
-                    title: null
                   options:
                     type: custom:mushroom-update-card
                     show_buttons_control: true
